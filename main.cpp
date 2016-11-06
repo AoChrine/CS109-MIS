@@ -2,7 +2,7 @@
 #include "common.h"
 #include <unordered_map>
 #include <string>
-#include "Instruction.h"
+//#include "Instruction.h"
 #include "Sub.h"
 
 using namespace std;
@@ -12,7 +12,8 @@ void parse(const string& file, unordered_map<string, string>& varMap, unordered_
 int main(int argc, const char* argv[] )
 {
 	
-	Sub * testSub = new Sub();
+	Sub* testSub = new Sub();
+	testSub->process();
 	// unordered_map<string, string> varMap;
 	// //vector<class name w/template> resultVec;
 	// unordered_map<string, Instruction*> instMap;

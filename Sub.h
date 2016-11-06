@@ -2,8 +2,7 @@
 #ifndef SUB_H
 #define SUB_H
 #include "common.h"
-
-class Instruction;
+#include "Instruction.h"
 
 // template <class T>
 class Sub: public Instruction

@@ -6,9 +6,9 @@ class Instruction
 {
 protected:
 public:
-  Instruction(){};
+  Instruction();
   virtual Instruction* clone(stringstream& ss) = 0;
   virtual void initialize(stringstream& ss) = 0;
   virtual void process() = 0;
-  virtual ~Instruction(){};
+  virtual ~Instruction();
 };
