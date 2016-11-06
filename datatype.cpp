@@ -1,6 +1,23 @@
 #include "common.h"
 using namespace std;
 
+template <class T>
+class DataTypes {
+    T a;
+  public:
+    DataTypes(T value)
+      {a=value;}
+    T get();
+    void update(T b){a = b;};
+    
+};
+
+template <class T>
+T DataTypes<T>::get()
+{
+  return a;
+}
+
 class NUMERIC
 {
 private:
