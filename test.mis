@@ -1,1 +1,4 @@
-SUB
+SUB $myint,4,5
+SUB $myint,3,7
+SET_STR_CHAR $mystring, 2, i
+DIV $myint, 4,2

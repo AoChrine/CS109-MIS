@@ -1,23 +1,24 @@
 //Div.h
+#ifndef DIV_H
+#define DIV_H
+#include "Sub.h"
 
-#include "Div.h"
-class Instruction
-class Sub
 using namespace std;
-template<class T>
-
+//template<class T>
+	
 class Div:public Sub
 {
 protected:
-  T * param1;
-  T * param2;
-  T * param3;
+  string param1;
+  int param2;
+  int param3;
 public:
-	Div():Sub(T * param1, T * param2, T * param3);
-	virtual Intruction* clone(stringstream& ss);
-	virtual void initialize(stringstream& ss);
-  	virtual void process();
-  	virtual Div operator/();
-	virtual ~div();
-}
+	Div();
+	Div(string para1,int para2, int para3);
+	virtual Instruction* clone(stringstream& ss);
+  	virtual void process(unordered_map<string, string>& varMap);
+  	//virtual Div operator/();
+	virtual ~Div();
+};
 
+#endif

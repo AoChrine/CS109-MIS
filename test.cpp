@@ -12,7 +12,5 @@ int main()
 	y.update(2, 'z');
 	cout << y.get() << endl;
 
-
-
 	return 0;
 }

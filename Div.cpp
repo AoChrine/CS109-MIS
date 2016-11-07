@@ -1,17 +1,11 @@
 //Div.cpp
 
 #include "Div.h"
+using namespace std;
 
-Div::Div():Sub(T param1, T param2, T param3){};
+Div::Div():Sub("",0,0){};
 
-void Div::initialize(stringstream & ss)
-{
-    string str = "";
-    getline(ss,str,',');
-    param2 = strof(str.c_str(),NULL);
-    getline(ss,str,',');
-    param3 = strof(str.c_str(),NULL);
-}
+Div::Div(string para1, int para2, int para3):Sub(para1, para2, para3){}
 
 Instruction * Div::clone(stringstream & ss)
 {
@@ -20,4 +14,17 @@ Instruction * Div::clone(stringstream & ss)
     return div;
 }
 
+//Div operator/();
+
+
+void Div::process(unordered_map<string, string>& varMap)
+{
+	cout<<"Div Processing"<<endl;
+	param1 = Sub::param1;
+	param2 = Sub::param2;
+	param3 = Sub::param3;
+	cout<<param1<<"<"<<param2<<"<"<<param3<<endl;
+    int temp = param2/param3;
+    varMap[param1]=to_string(temp);
+}
 Div::~Div(){}; //Destructor

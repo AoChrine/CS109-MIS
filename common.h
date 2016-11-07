@@ -14,4 +14,6 @@
 #include <algorithm>
 #include <typeinfo>
 #include <sstream>
+#include <unordered_map>
+#include <string>
 
