@@ -12,26 +12,24 @@ void Ssc::initialize(stringstream& ss)
     string s= "";
     getline(ss,s,',');
     line.assign(s);
-    cout<<line<<endl;
+    //cout<<line<<endl;
     getline(ss,s, ',');
     index = strtof(s.c_str(),NULL);
-    cout<<index<<endl;
+    //cout<<index<<endl;
     getline(ss,s, ',');
     character.assign(s);
-    cout<<character<<endl;
+    //cout<<character<<endl;
 }
 
-void Ssc::process(unordered_map<string, string>& varMap)
+void Ssc::process(unordered_map<string, string>& varMap,vector<Instruction*>& instVec)
 {
     if(varMap.count(line)==1)
     {
         string temp="";
         temp.assign(varMap[line]);
-        cout<<temp<<endl;
-        temp[index] = character[1];
+        temp[index] = character[0];
         varMap[line] = temp;
     } else {cout<<"key doesn't exist"<<endl;}
-        cout<<"processing"<<endl;
 }
 
 Instruction * Ssc::clone(stringstream & ss)

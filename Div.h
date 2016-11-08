@@ -16,7 +16,7 @@ public:
 	Div();
 	Div(string para1,int para2, int para3);
 	virtual Instruction* clone(stringstream& ss);
-  	virtual void process(unordered_map<string, string>& varMap);
+  	virtual void process(unordered_map<string, string>& varMap,vector<Instruction*>& instVec);
   	//virtual Div operator/();
 	virtual ~Div();
 };

@@ -17,13 +17,11 @@ Instruction * Div::clone(stringstream & ss)
 //Div operator/();
 
 
-void Div::process(unordered_map<string, string>& varMap)
+void Div::process(unordered_map<string, string>& varMap,vector<Instruction*>& instVec)
 {
-	cout<<"Div Processing"<<endl;
 	param1 = Sub::param1;
 	param2 = Sub::param2;
 	param3 = Sub::param3;
-	cout<<param1<<"<"<<param2<<"<"<<param3<<endl;
     int temp = param2/param3;
     varMap[param1]=to_string(temp);
 }

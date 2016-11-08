@@ -15,7 +15,7 @@ class Sub: public Instruction
     Sub(string para1, int para2, int para3);
     virtual Instruction * clone(stringstream &ss);
     void initialize(stringstream &ss);
-    virtual void process(unordered_map<string, string>& varMap);
+    virtual void process(unordered_map<string, string>& varMap,vector<Instruction*>& instVec);
     Sub operator-();
     virtual ~Sub();
 };

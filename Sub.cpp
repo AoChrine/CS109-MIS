@@ -25,23 +25,18 @@ void Sub::initialize (stringstream& ss){
     if(ss.str().at(0)!='$')
     {
         param2=strtof(str.c_str(),NULL);
-        cout<<param2<<endl;
     } else {cout<<str.c_str()<<endl;}
     getline(ss,str,',');
-    cout<<str<<endl;
     if(ss.str().at(0)!='$')
     {
         param3=strtof(str.c_str(),NULL);
-        cout<<param3<<endl;
     } else {cout<<endl;}
-    
-    cout << param1 << param2 << param3 << endl;
+
 }
 
 //Sub operator-();
 
-void Sub::process(unordered_map<string, string>& varMap){
-    cout<<"process"<<endl;
+void Sub::process(unordered_map<string, string>& varMap,vector<Instruction*>& instVec){
     int temp=param3-param2;
     varMap[param1]=to_string(temp);
 }

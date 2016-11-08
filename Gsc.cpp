@@ -6,8 +6,9 @@ Gsc::Gsc():Ssc("",0,""){};
 
 Gsc::Gsc(string str, int i, string c):Ssc(str, i, c){}
 
-void Gsc::process(unordered_map<string, string>& varMap)
+void Gsc::process(unordered_map<string, string>& varMap,vector<Instruction*>& instVecc)
 {
+    
 	line = Ssc::line;
 	index=Ssc::index;
 	character=Ssc::character;
@@ -16,7 +17,8 @@ void Gsc::process(unordered_map<string, string>& varMap)
     {
         string temp="";
         temp.assign(varMap[line]);
-        string a(1, line[index]);
+        string a(1, temp[index]);
+        //cout<<a<<endl;
         varMap[character].assign(a);
     } else {cout<<"key doesn't exist"<<endl;}
 }

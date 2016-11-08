@@ -1,4 +1,4 @@
-SUB $myint,4,5
-SUB $myint,3,7
-SET_STR_CHAR $mystring, 2, i
-DIV $myint, 4,2
+VAR $myint,NUMERIC,100
+VAR $myfloat,REAL,12.14
+VAR $mychar,CHAR,’c’
+VAR $mystr,STRING,100,”Hello world MIS!!!”
