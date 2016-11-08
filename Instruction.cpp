@@ -1,5 +1,5 @@
-// //Instruction.cpp
-// #include "Instruction.h"
+//Instruction.cpp
+#include "Instruction.h"
 
-// Instruction::Instruction() {}
-// Instruction:: ~Instruction() {}
+Instruction::Instruction() {}
+Instruction:: ~Instruction() {}

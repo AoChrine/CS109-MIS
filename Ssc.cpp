@@ -21,14 +21,14 @@ void Ssc::initialize(stringstream& ss)
     //cout<<character<<endl;
 }
 
-void Ssc::process(unordered_map<string, string>& varMap,vector<Instruction*>& instVec)
+void Ssc::process(unordered_map<string, pair<string,string>>& varMap,vector<Instruction*>& instVec)
 {
     if(varMap.count(line)==1)
     {
         string temp="";
-        temp.assign(varMap[line]);
+        temp.assign(varMap[line].first);
         temp[index] = character[0];
-        varMap[line] = temp;
+        varMap[line].first = temp;
     } else {cout<<"key doesn't exist"<<endl;}
 }
 
@@ -37,6 +37,11 @@ Instruction * Ssc::clone(stringstream & ss)
     Ssc* ssc= new Ssc();
     ssc->initialize(ss);
     return ssc;
+}
+
+string Ssc::getName()
+{
+    return "";
 }
 
 Ssc::~Ssc(){}

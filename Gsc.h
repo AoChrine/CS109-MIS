@@ -14,7 +14,9 @@ public:
     Gsc();
     Gsc(string str, int i, string c);
     virtual Instruction* clone(stringstream& ss);
-    virtual void process(unordered_map<string, string>& varMap,vector<Instruction*>& instVec);
+    virtual void process(unordered_map<string, pair<string,string>>& varMap,vector<Instruction*>& instVec);
+    virtual string getName();
+    virtual string getType(){return "GSC";}
     virtual ~Gsc();
 };
 

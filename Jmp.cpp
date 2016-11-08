@@ -4,7 +4,7 @@
 
 Jmp::Jmp():Jmp(""){}
 
-Jmp::Jmp(string param1):name(param1), Instruction(){}
+Jmp::Jmp(string param1):labelName(param1), Instruction(){}
 
 Instruction* Jmp::clone(stringstream& ss)
 {
@@ -17,16 +17,31 @@ void Jmp::initialize(stringstream& ss)
 {
     string str = "";
     getline(ss,str);
-    name.assign(str);
+    labelName.assign(str);
 }
 
-void Jmp::process(unordered_map<string, string>& varMap,vector<Instruction*>& instVec)
+void Jmp::process(unordered_map<string, pair<string,string>>& varMap,vector<Instruction*>& instVec)
 {
-    int index = stoi(varMap[name]);
-    for(auto it=instVec.begin()+index;it!=instVec.end(); it++)
-    {
-        (*it)->process(varMap,instVec);
-    }
+    // auto itjmp = varMap.find(name);
+    // //int index = stoi(varMap[name]);
+    // for(auto itjmp = instVec.begin(); itjmp!=instVec.end(); itjmp++)
+    // {
+    //     (*itjmp)->process(varMap,instVec);
+    // }
 }
+//*********************************************
+string Jmp::getName(){
+    return labelName;
+}
+
+string Jmp::getType()
+{
+    return "JMP";
+}
+
+// bool Jmp::checkJmp(unordered_map<string, pair<string,string>>& varMap)
+// {
+//     return true;
+// }
 
 Jmp::~Jmp(){}

@@ -2,14 +2,10 @@
 // #include "DataType.cpp"
 using namespace std;
 
-
-/////////FORWARD DECLARATION PROBLEMS////////////////////////////////////////////////
-
-
-Var::Var():Var("","","",""){}
+Var::Var():Var("","","",""){} // default constructor to pass to parameterized constructor
 
 
-Var::Var(string s_stringN, string s_stringT, string s_defaultVal, string s_size):
+Var::Var(string s_stringN, string s_stringT, string s_defaultVal, string s_size): // parameterized constructor
 stringN(s_stringN), stringT(s_stringT), defaultVal(s_defaultVal), size(s_size), Instruction(){}
 
 
@@ -20,59 +16,59 @@ Instruction* Var::clone(stringstream& ss){
     return var;
 }
 
-
+// parses and initializes parameters for Var object
 void Var::initialize (stringstream& ss){
     string str = "";
     getline(ss, str, ',');
-    stringN = str;
+    stringN = str; // sets name of variable
     getline(ss,str,',');
-    stringT = str;
+    stringT = str; // sets type of variable
     getline(ss,str,',');
-    defaultVal = str; //will return char(if it is char) in single quotes
+    defaultVal = str; // sets value of variable
     getline(ss,str,',');
-    if(str.empty()) {
-        defaultVal = str;
-        size = "";
+    if(str.empty()) { // if 4th parameter is empty, variable is not string
+        size = "";    // empty size
     } else{
-        size = defaultVal;
+        size = defaultVal; // if variable is a string, size = 4th parameter
         defaultVal = str;
     }
 }
 
-
-void Var::process(unordered_map<string, string>& varMap,vector<Instruction*>& instVec){
+// processing to create respective object variables based on parameter
+void Var::process(unordered_map<string, pair<string, string>>& varMap,vector<Instruction*>& instVec){
     if(stringT == "NUMERIC") {
-        d = new NUMERIC(stringN, defaultVal);
-        pair<string, string>numPair (d->getName(), to_string(d->getValue()));
-        varMap.insert(numPair);
-        cout << "inserted numeric into orderMap" << endl;
+        d = new NUMERIC(stringN, defaultVal); // creates new NUMERIC object
+        pair<string, string>valTypePair (to_string((int64_t)d->getValue()), d->getType()); // creates pair with value and type
+        pair<string, pair<string, string>>numPair (d->getName(), valTypePair);
+        varMap.insert(numPair); // pushes variable name and pair into varMap
     }
     if(stringT == "REAL"){
-        d = new REAL(stringN, defaultVal); 
-        pair<string, string>numPair (d->getName(), to_string(d->getValue()));
-        varMap.insert(numPair); 
-        cout << "inserted real into orderMap" << endl;
+        d = new REAL(stringN, defaultVal);  // creates REAL object
+        pair<string, string>valTypePair (to_string(d->getValue()), d->getType()); // creates pair with value and type
+        pair<string, pair<string, string>>numPair (d->getName(), valTypePair);
+        varMap.insert(numPair); // pushes variable name and pair into varMap
     }
     if(stringT == "CHAR"){
-        d = new CHAR(stringN, defaultVal);
+        d = new CHAR(stringN, defaultVal); // creates CHAR object
         string s(1, d->getChar());
-        pair<string, string>numPair (d->getName(), s);
-        varMap.insert(numPair);
-        cout << "inserted char into orderMap" << endl;
+        pair<string, string>valTypePair (s, d->getType()); // creates pair with char and type
+        pair<string, pair<string, string>>numPair (d->getName(), valTypePair);
+        varMap.insert(numPair); // pushes variable name and pair into varMap
     }
     if(stringT == "STRING"){
-        d = new STRING(stringN, defaultVal, size);
+        d = new STRING(stringN, defaultVal, size); // creates STRING object
         string s(d->getString());
-        pair<string, string>numPair (d->getName(), s);
-        varMap.insert(numPair);
-        cout << "inserted string into orderMap" << endl;
+        pair<string, string>valTypePair (s, d->getType()); // creates pair with string and type
+        pair<string, pair<string, string>>numPair (d->getName(), valTypePair);
+        varMap.insert(numPair); // pushes vairalbe name and pair into varMap
     }
    
 }
 
-Var::~Var(){} // destructor
 
-// int main()
-// {
-//     cout << "this is main" << endl;
-// }
+string Var::getName()
+{
+    return "";
+}
+
+Var::~Var(){} // destructor

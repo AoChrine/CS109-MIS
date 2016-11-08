@@ -20,13 +20,18 @@ void Label::initialize(stringstream& ss)
     name.assign(str);
 }
 
-void Label::process(unordered_map<string,string>& varMap, vector<Instruction*>& instVec)
+void Label::process(unordered_map<string, pair<string,string>>& varMap, vector<Instruction*>& instVec)
 {
     //plan: put label name in variable list, value being the next number instruction. when 
     //jumping, look up variable name in varMap. look up value in varMap in orderMap, iterate
     
     //cout<<"LProcessing"<<instVec.size()<<endl;
-    varMap[name] = to_string(instVec.size());
+    varMap[name].first = to_string(instVec.size());
+}
+
+string Label::getName()
+{
+    return "LABEL";   
 }
 
 Label::~Label(){}

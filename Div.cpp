@@ -3,10 +3,11 @@
 #include "Div.h"
 using namespace std;
 
-Div::Div():Sub("",0,0){};
+Div::Div():Sub("","",""){} // calls inherited Sub constructor
 
-Div::Div(string para1, int para2, int para3):Sub(para1, para2, para3){}
+Div::Div(string para1, string para2, string para3):Sub(para1, para2, para3){}
 
+// creating a new Div object based on the provided string stream    
 Instruction * Div::clone(stringstream & ss)
 {
     Div* div = new Div();
@@ -14,15 +15,23 @@ Instruction * Div::clone(stringstream & ss)
     return div;
 }
 
-//Div operator/();
-
-
-void Div::process(unordered_map<string, string>& varMap,vector<Instruction*>& instVec)
+// processing of addition functionality, using initializer from Sub and doing appropriate parsing
+void Div::process(unordered_map<string, pair<string,string>>& varMap,vector<Instruction*>& instVec)
 {
-	param1 = Sub::param1;
+	param1 = Sub::param1; // parameters set through Sub's initializer
 	param2 = Sub::param2;
 	param3 = Sub::param3;
-    int temp = param2/param3;
-    varMap[param1]=to_string(temp);
+	
+	if(param2.at(0)=='$') varParam2=varMap[param2].first;
+    else varParam2.assign(param2);
+    if(param3.at(0)=='$') varParam3=varMap[param3].first;
+    else varParam3.assign(param3);
+	
+	double temp = stof(varParam2)/stof(varParam3); // division of two parameters
+    varMap[param1].first=to_string(temp);    // pushes newly assigned variable back to varMap
 }
+
+string Div::getName(){return "";}
+
+
 Div::~Div(){}; //Destructor

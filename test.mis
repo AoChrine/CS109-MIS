@@ -1,4 +1,10 @@
 VAR $myint,NUMERIC,100
+VAR $myint2,NUMERIC,500
 VAR $myfloat,REAL,12.14
-VAR $mychar,CHAR,’c’
-VAR $mystr,STRING,100,”Hello world MIS!!!”
+VAR $mychar,CHAR,'c'
+VAR $mystr,STRING,”Hello world MIS!!!”
+SLEEP 5
+SUB $myint,10,5
+DIV $myfloat,10,$myint
+OUT $myint,$myfloat,10,20,30,40.0,50,60.5
+ASSIGN $myint,$myint2
