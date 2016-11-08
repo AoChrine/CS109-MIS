@@ -11,14 +11,27 @@ Instruction* Out::clone(stringstream& ss){
 }
 
 void Out::initialize (stringstream& ss){
+    ofstream err;
+    err.open("MIS.err", std::ios_base::app);
+    int counter = 1;
     string str = "";
     getline(ss, str, ',');
-    while(!ss.eof()) {  //as long as file continues
+    cout << "lit" << str << endl;
+    if(str.empty()) {
+        err << "asdofiahsdoifhadois Invalid number of parameters for Out" << endl;
+    }else {
+        while(!ss.eof()) {  //as long as file continues
+        if((counter >= 12)){
+            err << "Exceed number of parameters for Out" << endl;
+            break;
+        }
         paramVec.push_back(str);
         getline(ss, str, ',');
+        counter++;
+        }
+        paramVec.push_back(str);
     }
     //push all the parsed strings to the paramVector
-    paramVec.push_back(str);
 }
 
 void Out::process(unordered_map<string, pair<string, string>>& varMap,vector<Instruction*>& instVec){

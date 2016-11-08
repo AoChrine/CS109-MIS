@@ -40,12 +40,4 @@ string Jmpnz::getParam2()
     return varParam2;
 }
 
-// bool Jmpnz::param2Jmp(unordered_map<string, pair<string,string>>& varMap)
-// {
-//     param2 = Jmpz::param2;
-//     int z= stoi(varMap[param2].first);
-//     if(z!=0) return true;
-//     return false;
-// }
-
 Jmpnz::~Jmpnz(){}

@@ -174,7 +174,7 @@ void parse(const string& file, unordered_map<string, pair<string,string>>& varMa
 					//cout << differenceVec.back() << ": " << differenceVec.front() << endl;
 					if(differenceVec.size() == 2) {
 						if(differenceVec.back() >= differenceVec.front()) {
-							err << "Infinite Loop from JMPGTE" << endl;
+							err << "Infinite Loop from JMPLT" << endl;
 							break;
 						}
 						differenceVec.clear();
@@ -245,7 +245,7 @@ void parse(const string& file, unordered_map<string, pair<string,string>>& varMa
 					//cout << differenceVec.back() << ": " << differenceVec.front() << endl;
 					if(differenceVec.size() == 2) {
 						if(differenceVec.back() == differenceVec.front()) {
-							err << "Infinite Loop from JMPZ" << endl;
+							err << "Infinite Loop from JMPNZ" << endl;
 							break;
 						}
 						differenceVec.clear();

@@ -14,12 +14,18 @@ Instruction* Jmpz::clone(stringstream &ss)
 
 void Jmpz::initialize(stringstream &ss)
 {
+    ofstream err;
+    err.open("MIS.err", std::ios_base::app);
     string str = "";
     getline(ss,str,',');
     labelName.assign(str);
     getline(ss,str,',');
     //need to take into account constants
     param2.assign(str);
+    getline(ss,str);
+    if(str.compare(param2) == 0 || !str.empty()){
+        err << "Invalid number of parameters for Jmpz/Jmpnz" << endl;
+    }
 }
 
 void Jmpz::process(unordered_map<string, pair<string,string>>& varMap,vector<Instruction*>& instVec)
@@ -44,13 +50,5 @@ string Jmpz::getParam2()
 {
     return varParam2;
 }
-
-// bool Jmpz::param2Jmp(unordered_map<string, pair<string,string>>& varMap)
-// {
-//     if(stoi(varMap[param2].first)==0) return true;
-//     return false;
-// }
-
-
 
 Jmpz::~Jmpz(){}

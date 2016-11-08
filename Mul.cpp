@@ -26,9 +26,7 @@ void Mul::initialize (stringstream& ss){
             break;
         }
         paramVec.push_back(str);
-        //cout << "pushed in: " << str << endl;
         getline(ss, str, ',');
-        //cout << "initializing Mul with str: " << str << endl;
         counter++;
     }
     paramVec.push_back(str);
@@ -38,12 +36,11 @@ void Mul::process(unordered_map<string, pair<string,string>>& varMap,vector<Inst
     double product = 1;
     for(auto it = paramVec.begin(); it!= paramVec.end(); it++){ // iterates through parameter vector and multiplies accordingly
         if((*it).at(0) == '$'){             // if parameter is a variable, get value from map
-           //*it = varMap[(*it)].first;
            varParam = varMap[(*it)].first;
         }else{
             varParam = *it;
         }
-        //product *= stod((*it));             // multiply parameter with previous product
+         // multiply parameter with previous product
         product *= stod(varParam);
     }
     if(varMap[param1].second == "NUMERIC") {    // if data type is NUMERIC, cast product as 8 byte integer
