@@ -18,6 +18,8 @@ Instruction* Var::clone(stringstream& ss){
 
 // parses and initializes parameters for Var object
 void Var::initialize (stringstream& ss){
+    ofstream err;
+    err.open("MIS.err", std::ios_base::app);
     string str = "";
     getline(ss, str, ',');
     stringN = str; // sets name of variable
@@ -31,6 +33,10 @@ void Var::initialize (stringstream& ss){
     } else{
         size = defaultVal; // if variable is a string, size = 4th parameter
         defaultVal = str;
+    }
+    getline(ss,str,' ');
+    if(!str.compare(" ")){
+        err << "Invalid number of parameters for Var" << endl;
     }
 }
 

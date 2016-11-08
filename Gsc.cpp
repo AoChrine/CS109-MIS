@@ -19,8 +19,8 @@ void Gsc::process(unordered_map<string, pair<string,string>>& varMap,vector<Inst
     {
         string temp="";
         temp.assign(varMap[line].first);    //store the string variable in a temp
+        if(index>=temp.size()) err<<"index out of range"<<endl;
         string a(1, temp[index]);   //take the character at the index of the string
-        
         varMap[character].first.assign(a);  //store character into 3rd variable
     } else {err<<"Key doesn't exist"<<endl;}
 }

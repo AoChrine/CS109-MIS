@@ -14,6 +14,8 @@ Instruction * Jmpgt::clone(stringstream& ss)
 }
 void Jmpgt::initialize(stringstream& ss)
 {
+    ofstream err;
+    err.open("MIS.err", std::ios_base::app);
     //initialize param
     string str="";
     getline(ss,str,',');
@@ -22,6 +24,10 @@ void Jmpgt::initialize(stringstream& ss)
     param2.assign(str);
     getline(ss,str,',');
     param3.assign(str);
+    getline(ss,str,' ');
+    if(!str.compare(" ")) {
+        err << "Invalid number of parameters for Jmpgt/Jmpgte/Jmplt/Jmplte" << endl;
+    }
 }
 
 void Jmpgt::process( unordered_map<string, pair<string,string>>& varMap, vector<Instruction*>& instVec)

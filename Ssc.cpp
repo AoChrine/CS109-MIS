@@ -9,6 +9,8 @@ Ssc::Ssc(string str, int i, string c):
     
 void Ssc::initialize(stringstream& ss)
 {
+    ofstream err;
+    err.open("MIS.err", std::ios_base::app);
     string s= "";
     getline(ss,s,',');
     line.assign(s);
@@ -19,6 +21,10 @@ void Ssc::initialize(stringstream& ss)
     getline(ss,s, ',');
     character.assign(s);
     //cout<<character<<endl;
+    getline(ss,s);
+    if(!s.empty()){
+        err << "Invalid number of parameters for Ssc/Gsc" << endl;
+    }
 }
 
 void Ssc::process(unordered_map<string, pair<string,string>>& varMap,vector<Instruction*>& instVec)
@@ -30,6 +36,7 @@ void Ssc::process(unordered_map<string, pair<string,string>>& varMap,vector<Inst
         //grab the first character and set it to the corresponding index
         string temp=""; //create temp string to assign
         temp.assign(varMap[line].first); //assigns string variable to temp
+        if(index>=temp.size()) err<<"index out of range"<<endl;
         temp[index] = character[0];//changes the character at the index of the string variable.
         varMap[line].first = temp;
     } else {err<<"Key doesn't exist"<<endl;}

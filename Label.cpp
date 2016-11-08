@@ -15,9 +15,15 @@ Instruction* Label::clone(stringstream & ss)
 
 void Label::initialize(stringstream& ss)
 {
+    ofstream err;
+    err.open("MIS.err", std::ios_base::app);
     string str ="";
     getline(ss, str);
     name.assign(str);
+    getline(ss,str,' ');
+    if(!str.compare(" ")) {
+        err << "Invalid number of parameters for Label" << endl;
+    }
 }
 
 void Label::process(unordered_map<string, pair<string,string>>& varMap, vector<Instruction*>& instVec)

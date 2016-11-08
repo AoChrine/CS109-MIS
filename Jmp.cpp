@@ -15,9 +15,15 @@ Instruction* Jmp::clone(stringstream& ss)
 
 void Jmp::initialize(stringstream& ss)
 {
+    ofstream err;
+    err.open("MIS.err", std::ios_base::app);
     string str = "";
     getline(ss,str);
     labelName.assign(str); //set labelName for jump
+    getline(ss,str);
+    if(str.compare(labelName)==0 || !str.empty()){
+        err << "Invalid number of parameters for Jmp" << endl;
+    }
 }
 
 void Jmp::process(unordered_map<string, pair<string,string>>& varMap,vector<Instruction*>& instVec){}
