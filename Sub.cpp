@@ -23,13 +23,10 @@ void Sub::initialize (stringstream& ss){
     err.open("MIS.err", std::ios_base::app);
     string str = "";
     getline(ss, str, ',');
-    cout<<str<<endl;
     param1.assign(str);   // parameter to store difference in 
     getline(ss,str,',');
-    cout<<str<<endl;
     param2.assign(str);   // first parameter
     getline(ss,str,',');
-    cout<<"3rd str: "<<str<<endl;
     param3.assign(str);   // parameter to subtract
     getline(ss,str,' ');
     if(!str.compare(" ")){

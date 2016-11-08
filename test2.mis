@@ -1,6 +1,1 @@
-VAR $myint,NUMERIC,10
-SUB $myint,$myint,2
-SUB $myint,$myint,2
-SUB $myint,$myint,2
-SUB $myint,$myint,2
-SUB $myint,$myint,2
+VAR $mystring,STRING,100

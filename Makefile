@@ -2,8 +2,8 @@
 
 MKFILE      = Makefile
 GMAKE       = ${MAKE} --no-print-directory
-COMPILECPP  = g++ -std=gnu++14 -g -w -O0 -Wall -Wextra -Wold-style-cast
-MAKEDEPCPP  = g++ -std=gnu++14 -MM
+COMPILECPP  = g++-5 -std=gnu++14 -g -w -O0 -Wall -Wextra -Wold-style-cast
+MAKEDEPCPP  = g++-5 -std=gnu++14 -MM
 
 MODULES     = Add Assign DataType Div Gsc Instruction Jmp Jmpgt Jmpgte Jmplt Jmplte Jmpnz Jmpz Label Mul Out Sleep Ssc Sub Var
 CPPHEADER   = ${MODULES:=.h} common.h

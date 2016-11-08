@@ -16,15 +16,14 @@ void Out::initialize (stringstream& ss){
     int counter = 1;
     string str = "";
     getline(ss, str, ',');
-    cout << "lit" << str << endl;
     if(str.empty()) {
         err << "asdofiahsdoifhadois Invalid number of parameters for Out" << endl;
     }else {
         while(!ss.eof()) {  //as long as file continues
-        if((counter >= 12)){
-            err << "Exceed number of parameters for Out" << endl;
-            break;
-        }
+            if((counter >= 12)){
+                err << "Exceed number of parameters for Out" << endl;
+                break;
+            }
         paramVec.push_back(str);
         getline(ss, str, ',');
         counter++;
@@ -36,7 +35,7 @@ void Out::initialize (stringstream& ss){
 
 void Out::process(unordered_map<string, pair<string, string>>& varMap,vector<Instruction*>& instVec){
     ofstream out;
-    out.open("MIS.out", std::ios_base::app);
+    out.open("MIS.out");
     
     for(auto it = paramVec.begin(); it!= paramVec.end(); it++){
         if((*it).at(0) == '$'){
