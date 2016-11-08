@@ -10,11 +10,10 @@ protected:
 public:
     Jmp();
     Jmp(string param1);
-    virtual Instruction * clone(stringstream &ss);
-    void initialize(stringstream&ss);
-    virtual void process(unordered_map<string, pair<string,string>>& varMap, vector<Instruction*>& instVec);
+    virtual Instruction * clone(stringstream &ss);  //return new object
+    void initialize(stringstream&ss);   //set internal variables
+    virtual void process(unordered_map<string, pair<string,string>>& varMap, vector<Instruction*>& instVec);    //placeholder to satisfy pure virtual method in instruction
     virtual string getName();
-    //virtual bool checkJmp(unordered_map<string, pair<string,string>>& varMap);
     virtual string getType();
     virtual ~Jmp();
 };

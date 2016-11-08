@@ -15,19 +15,14 @@ Instruction * Jmpnz::clone(stringstream &ss)
 
 void Jmpnz::process(unordered_map<string, pair<string,string>>& varMap,vector<Instruction*>& instVec)
 {
+    //set param from jmpz's param
+    labelName = Jmpz::labelName;
+    param2 = Jmpz::param2;
+    
+    //update param val from varMap if its a variable
     if(param2.at(0)=='$') varParam2=varMap[param2].first;
+    //else set to constant
     else varParam2=param2;
-    // labelName = Jmpz::labelName;
-    // param2 = Jmpz::param2;
-    // int index = stoi(varMap[labelName].first);
-    // int z = stoi(varMap[param2].first);
-    // if(z!=0)
-    // {
-    //     for(auto it=instVec.begin()+index;it!=instVec.end(); it++)
-    //     {
-    //         (*it)->process(varMap,instVec);
-    //     }
-    // }
 }
 
 string Jmpnz::getName()
@@ -42,7 +37,7 @@ string Jmpnz::getType()
 
 string Jmpnz::getParam2()
 {
-    return param2;
+    return varParam2;
 }
 
 // bool Jmpnz::param2Jmp(unordered_map<string, pair<string,string>>& varMap)

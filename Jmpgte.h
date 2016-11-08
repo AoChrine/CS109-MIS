@@ -14,10 +14,9 @@ protected:
 public:
     Jmpgte();
     Jmpgte(string l, string p2, string p3);
-    virtual Instruction *clone(stringstream& ss);
-    virtual void process(unordered_map<string, pair<string,string>>& varMap, vector<Instruction*> instVec);
+    virtual Instruction *clone(stringstream& ss);   //return new object
+    virtual void process(unordered_map<string, pair<string,string>>& varMap, vector<Instruction*>& instVec);    //update variable value from map
     virtual string getName();
-    //virtual bool checkJmp(unordered_map<string, pair<string,string>>& varMap);
     virtual string getType();
     virtual string getParam2();
     virtual string getParam3();

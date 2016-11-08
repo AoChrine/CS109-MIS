@@ -24,17 +24,10 @@ void Jmpz::initialize(stringstream &ss)
 
 void Jmpz::process(unordered_map<string, pair<string,string>>& varMap,vector<Instruction*>& instVec)
 {
+    //update val from map if param is variable
     if(param2.at(0)=='$') varParam2=varMap[param2].first;
+    //else set param to const
     else varParam2=param2;
-    // int index = stoi(varMap[labelName].first);
-    // int z = stoi(varMap[param2].first);
-    // if(z==0)
-    // {
-    //     for(auto it=instVec.begin()+index;it!=instVec.end(); it++)
-    //     {
-    //         (*it)->process(varMap,instVec);
-    //     }
-    // }
 }
 
 string Jmpz::getName()
@@ -49,7 +42,7 @@ string Jmpz::getType()
 
 string Jmpz::getParam2()
 {
-    return param2;
+    return varParam2;
 }
 
 // bool Jmpz::param2Jmp(unordered_map<string, pair<string,string>>& varMap)

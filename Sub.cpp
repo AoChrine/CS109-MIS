@@ -31,7 +31,7 @@ void Sub::initialize (stringstream& ss){
 
 // processes and completes subtraction operation
 void Sub::process(unordered_map<string, pair<string, string>>& varMap,vector<Instruction*>& instVec){
-    cout << "sub processing" << endl;
+    //cout << "sub processing" << endl;
     // if(param3[0] == '$'){ // if parameter is a variable, get value from varMap
     //     param3 = varMap[param3].first;
     // }

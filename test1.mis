@@ -1,7 +1,5 @@
 VAR $myint,NUMERIC,10
-LABEL yo
-SUB $myint,$myint,1
+JMPNZ yo,$myint
 SUB $myint,$myint,2
-SUB $myint,$myint,3
-JMPGT yo,$myint,2   
+LABEL yo
 ADD $myint,1,$myint

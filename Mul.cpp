@@ -13,6 +13,8 @@ Instruction* Mul::clone(stringstream& ss){
 
 // parses and initializes variables in Mul
 void Mul::initialize (stringstream& ss){
+    ofstream err;
+    err.open("MIS.err", std::ios_base::app);
     int counter = 1;
     string str = "";
     getline(ss, str, ',');
@@ -20,12 +22,13 @@ void Mul::initialize (stringstream& ss){
     getline(ss, str, ',');
     while(!ss.eof()) {       // creates parameter vector to store variables/constant to be multiplied
         if(counter >= 13){
+            err << "Exceeded number of parameters for Mul" << endl;
             break;
         }
         paramVec.push_back(str);
-        cout << "pushed in: " << str << endl;
+        //cout << "pushed in: " << str << endl;
         getline(ss, str, ',');
-        cout << "initializing Mul with str: " << str << endl;
+        //cout << "initializing Mul with str: " << str << endl;
         counter++;
     }
     paramVec.push_back(str);

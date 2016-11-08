@@ -10,38 +10,25 @@ Instruction* Jmp::clone(stringstream& ss)
 {
     Jmp *jmp = new Jmp();
     jmp->initialize(ss);
-    return jmp;
+    return jmp; //clone and return the new jmp object
 }
 
 void Jmp::initialize(stringstream& ss)
 {
     string str = "";
     getline(ss,str);
-    labelName.assign(str);
+    labelName.assign(str); //set labelName for jump
 }
 
-void Jmp::process(unordered_map<string, pair<string,string>>& varMap,vector<Instruction*>& instVec)
-{
-    // auto itjmp = varMap.find(name);
-    // //int index = stoi(varMap[name]);
-    // for(auto itjmp = instVec.begin(); itjmp!=instVec.end(); itjmp++)
-    // {
-    //     (*itjmp)->process(varMap,instVec);
-    // }
-}
-//*********************************************
+void Jmp::process(unordered_map<string, pair<string,string>>& varMap,vector<Instruction*>& instVec){}
+
 string Jmp::getName(){
-    return labelName;
+    return labelName; //return labelName
 }
 
 string Jmp::getType()
 {
     return "JMP";
 }
-
-// bool Jmp::checkJmp(unordered_map<string, pair<string,string>>& varMap)
-// {
-//     return true;
-// }
 
 Jmp::~Jmp(){}

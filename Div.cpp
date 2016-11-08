@@ -22,6 +22,7 @@ void Div::process(unordered_map<string, pair<string,string>>& varMap,vector<Inst
 	param2 = Sub::param2;
 	param3 = Sub::param3;
 	
+	//temp var to save map value for param. Keep param same so can update value from map when jump makes the instructions run again
 	if(param2.at(0)=='$') varParam2=varMap[param2].first;
     else varParam2.assign(param2);
     if(param3.at(0)=='$') varParam3=varMap[param3].first;

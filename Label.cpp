@@ -22,10 +22,7 @@ void Label::initialize(stringstream& ss)
 
 void Label::process(unordered_map<string, pair<string,string>>& varMap, vector<Instruction*>& instVec)
 {
-    //plan: put label name in variable list, value being the next number instruction. when 
-    //jumping, look up variable name in varMap. look up value in varMap in orderMap, iterate
-    
-    //cout<<"LProcessing"<<instVec.size()<<endl;
+    //set label name in varMap to hold the line number in which the label instruction appeared
     varMap[name].first = to_string(instVec.size());
 }
 

@@ -2,7 +2,7 @@
 
 #include "Ssc.h"
 
-Ssc::Ssc():Ssc("",0,""){}
+Ssc::Ssc():Ssc("",0,""){} //constructor 
 
 Ssc::Ssc(string str, int i, string c): 
     line(str), index(i), character(c), Instruction(){}
@@ -23,16 +23,19 @@ void Ssc::initialize(stringstream& ss)
 
 void Ssc::process(unordered_map<string, pair<string,string>>& varMap,vector<Instruction*>& instVec)
 {
+    ofstream err;
+    err.open("MIS.err", std::ios_base::app);
     if(varMap.count(line)==1)
     {
-        string temp="";
-        temp.assign(varMap[line].first);
-        temp[index] = character[0];
+        //grab the first character and set it to the corresponding index
+        string temp=""; //create temp string to assign
+        temp.assign(varMap[line].first); //assigns string variable to temp
+        temp[index] = character[0];//changes the character at the index of the string variable.
         varMap[line].first = temp;
-    } else {cout<<"key doesn't exist"<<endl;}
+    } else {err<<"Key doesn't exist"<<endl;}
 }
 
-Instruction * Ssc::clone(stringstream & ss)
+Instruction * Ssc::clone(stringstream & ss) //clones the ssc object
 {
     Ssc* ssc= new Ssc();
     ssc->initialize(ss);

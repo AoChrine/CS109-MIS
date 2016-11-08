@@ -8,6 +8,7 @@ using namespace std;
 class Var: public Instruction
 {
 	protected:
+		//hold a DataType object
 		DataType* d;
 		string stringN;
 		string stringT;

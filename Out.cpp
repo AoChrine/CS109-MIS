@@ -13,24 +13,26 @@ Instruction* Out::clone(stringstream& ss){
 void Out::initialize (stringstream& ss){
     string str = "";
     getline(ss, str, ',');
-    while(!ss.eof()) {
+    while(!ss.eof()) {  //as long as file continues
         paramVec.push_back(str);
-        cout << "pushed in: " << str << endl;
         getline(ss, str, ',');
-        cout << "initializing add with str: " << str << endl;
     }
+    //push all the parsed strings to the paramVector
     paramVec.push_back(str);
 }
 
 void Out::process(unordered_map<string, pair<string, string>>& varMap,vector<Instruction*>& instVec){
+    ofstream out;
+    out.open("MIS.out", std::ios_base::app);
     
     for(auto it = paramVec.begin(); it!= paramVec.end(); it++){
         if((*it).at(0) == '$'){
-            
+            //print out variables passed into out with their names and values
             string val = varMap[(*it)].first;
-            cout << *it << ": " << val << endl;
+            out << *it << ": " << val << endl;
         }else{
-            cout << *it << endl;
+            //print out any constants passed in
+            out << *it << endl;
         }
         
     }

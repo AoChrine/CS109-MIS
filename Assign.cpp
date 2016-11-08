@@ -24,6 +24,7 @@ void Assign::process(unordered_map<string, pair<string, string>>& varMap,vector<
     if(param2[0] == '$'){           // if parameter is a variable, get value from map
         varMap[param1].first = varMap[param2].first;    // set param2 to param1
     }else{
+        //replace str value for param1 with param2
         varMap[param1].first = param2;
     }
 }
