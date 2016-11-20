@@ -1,0 +1,4 @@
+VAR $mystring,STRING,100,"Hello world"
+OUT $mystring
+OUT 5
+OUT $mystring

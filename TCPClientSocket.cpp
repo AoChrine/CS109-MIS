@@ -7,17 +7,25 @@ void terminate_with_error (int sock);
 int main (int argc,char ** argv)
 {
 	vector<string> stringVec;
-	stringVec.push_back("This");
-	stringVec.push_back("Is");
-	stringVec.push_back("A");
-	stringVec.push_back("Test");
+
+
+	//make function to return constant void pointer to send over socket
+	ifstream readFile(argv[2]);
+	string name = "";
+	string line = "";
+	while(getline(readFile,line))
+	{
+		stringVec.push_back(line);
+	}
+
+
 	string passstr = stringVec.at(0);
 	for(auto it = stringVec.begin()+1; it != stringVec.end(); it++){
-		passstr += "\0"+(*it);
+		passstr += '~'+(*it);
 	}
 	const void* mystr = passstr.c_str();
-	if ( argc != 2) { // Check on the number of arguments and exit if incorrect
-		printf ("Usage: ./client <server-address>\n");
+	if ( argc != 3) { // Check on the number of arguments and exit if incorrect
+		printf ("Usage: ./client <server-address> <file> \n");
 		exit(1);
 	}
 	int sock; // Socket handler
@@ -39,7 +47,8 @@ int main (int argc,char ** argv)
 	// try to connect to the server and exit with an error message if failed
 	if (connect(sock,(sockaddr *)&serverAddr,sizeof(serverAddr)) == -1 ) terminate_with_error(sock);
 		send (sock, mystr,passstr.size(),0); // Send a message to the server.
-		close(sock);// Close the socket.
+		//close(sock);// Close the socket.
+
 	cout << "finshed" << endl;
 }
 

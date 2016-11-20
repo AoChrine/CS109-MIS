@@ -1,4 +1,5 @@
 #include "TCPServerSocket.h"
+#include "common2.h"
 
 using namespace std;
 
@@ -34,7 +35,26 @@ int main (int argc,char ** argv){
 		memset(buffer,0,maxBytes); // initialize it.
 		int bytes_read = recv (newsock,buffer,maxBytes,0); // read data from the socket
 	// if returned number of bytes is bigger that zero then print information about client and themessage
-	if ( bytes_read > 0 ) printf ("Received Message from %s:%d\n%s\n",(char*)inet_ntoa(clientAddr.sin_addr),clientAddr.sin_port,buffer);
+	if ( bytes_read > 0 ){
+		printf ("Received Message from %s:%d\n",(char*)inet_ntoa(clientAddr.sin_addr),clientAddr.sin_port);
+		//cout<<strlen(buffer)<<endl;
+		// for(int i = 0; i < strlen(buffer); i++){
+		//  	cout << buffer[i] << endl;
+		// }
+		//cout << buffer << endl;
+		vector<string> stringVec;
+		char* temp;
+		temp = strtok(buffer,"~");
+		while(temp != NULL) {
+			string tempstr(temp);
+			stringVec.push_back(tempstr);
+			temp = strtok(NULL,"~");
+
+		}
+		for(auto&x: stringVec) {
+			cout << x << endl;
+		}
+	}
 	else perror("Error Receiving Message:"); // else print error through perror.
 		close(newsock);// close the new socket
 	}

@@ -35,7 +35,7 @@ void Out::initialize (stringstream& ss){
 
 void Out::process(unordered_map<string, pair<string, string>>& varMap,vector<Instruction*>& instVec){
     ofstream out;
-    out.open("MIS.out");
+    out.open("MIS.out",fstream::app);
     
     for(auto it = paramVec.begin(); it!= paramVec.end(); it++){
         if((*it).at(0) == '$'){
