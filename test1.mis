@@ -1,9 +1,0 @@
-VAR $myint,NUMERIC,10
-JMPGT yo,$myint
-SUB $myint,$myint,2
-DIV $myint,8,4
-DIV $myint,6,2
-LABEL yo
-ADD $myint,1,$myint
-OUT 1,2,3,4,5
-OUT $myint,3,2,2,3,2,3,2,3,4,5,6,7,8,9,0,1

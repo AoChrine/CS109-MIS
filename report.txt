@@ -1,2 +1,0 @@
-CMPS109 - Long Project Phase 1 Report 
-Machine Instructions Simulator
