@@ -108,6 +108,13 @@ TCPSocket * TCPServerSocket::getConnection (int timeoutSec, int timeoutMilli,int
         // If we are here then we return NULL
 	return NULL;
 }
+
+//getter for socket
+int TCPServerSocket::getSocket() 
+{
+  return sock;
+}
+
 TCPServerSocket::~TCPServerSocket ( ) // Destructor
 {
 	shutdown (sock,SHUT_RDWR);  // Shutdown the server read/write channels

@@ -20,6 +20,7 @@ class TCPServerSocket // TCP Server Socket
 		bool initializeSocket (); // Initailize server socket
                 // Wait for a client connection and return a TCPSocket object that represents the client
 		TCPSocket * getConnection (int timeoutSec=0, int timeoutMilli=0,int readBufferSize=10*1024*1024,int writeBufferSize=10*1024*1024);
+		int getSocket ( );
 		~TCPServerSocket ( ); // Destructor
 };
 

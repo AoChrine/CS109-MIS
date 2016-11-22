@@ -159,7 +159,3 @@ TCPSocket::~TCPSocket ( ) // Descriptor
         close (sock); // Close socket descriptor
 }
 
-int main()
-{
-    cout << "what the max" << endl;
-}
