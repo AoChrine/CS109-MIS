@@ -1,4 +1,6 @@
 #include "TCPSocket.h"
+
+using namespace std;
 // Ths constructor is used when the socket is already created and established prior to object instantiation
 TCPSocket::TCPSocket (int _sock,char * _address, int _port ,int readBufferSize,int writeBufferSize)
 {
@@ -11,8 +13,10 @@ TCPSocket::TCPSocket (int _sock,char * _address, int _port ,int readBufferSize,i
     if ( _address != NULL) strcpy(remote_address,_address); // If _address is not NULL copy it to remote_address data member
     port = _port; // Set the port number
     // Setting receive and send socket buffers if the parameters readBufferSize and writeBufferSize are nit set to -1 respectively
-    if ( readBufferSize != -1 && setsockopt(sock, SOL_SOCKET, SO_RCVBUF,(void*) &readBufferSize,sizeof(int)) == -1)
-        printf ("Error setting receive buffer\n");
+    if ( readBufferSize != -1 && setsockopt(sock, SOL_SOCKET, SO_RCVBUF,(void*) &readBufferSize,sizeof(int)) == -1){
+            printf ("Error setting receive buffer\n");
+            cout<<readBufferSize<<setsockopt(sock, SOL_SOCKET, SO_RCVBUF,(void*) &readBufferSize,sizeof(int))<<endl;
+        }
     if ( writeBufferSize != -1 &&  setsockopt(sock, SOL_SOCKET, SO_SNDBUF,(void*) &writeBufferSize,sizeof(int)) == -1)
         printf ("Error setting send buffer\n");
     
@@ -61,8 +65,10 @@ TCPSocket::TCPSocket (char * _address, int port ,int readBufferSize,int writeBuf
                     (char *) &flag,
                     sizeof(int));
         // Setting receive and send socket buffers if the parameters readBufferSize and writeBufferSize are nit set to -1 respectively
-        if ( readBufferSize != -1 && setsockopt(sock, SOL_SOCKET, SO_RCVBUF,(void*) &readBufferSize,sizeof(int)) == -1)
+        if ( readBufferSize != -1 && setsockopt(sock, SOL_SOCKET, SO_RCVBUF,(void*) &readBufferSize,sizeof(int)) == -1){
             printf ("Error setting receive buffer\n");
+            cout<<readBufferSize<<setsockopt(sock, SOL_SOCKET, SO_RCVBUF,(void*) &readBufferSize,sizeof(int))<<endl;
+        }
         if ( writeBufferSize != -1 &&  setsockopt(sock, SOL_SOCKET, SO_SNDBUF,(void*) &writeBufferSize,sizeof(int)) == -1)
             printf ("Error setting send buffer\n");
         // Connect to remote server
@@ -84,6 +90,8 @@ TCPSocket::TCPSocket (char * _address, int port ,int readBufferSize,int writeBuf
 char * TCPSocket::getRemoteAddress() { return remote_address; } // Selector returning the remote address
 
 char * TCPSocket::getMyAddress() {return my_address;} // Selector returning the socket local address
+
+int TCPSocket::getSocket() { return sock; }
 
 int TCPSocket::readFromSocket (char * buffer, int maxBytes ) { // Blocking read data operation from socket
     if ( buffer != NULL ) {

@@ -41,6 +41,8 @@ class TCPSocket // TCP Socket Class
             void shutDown();
             // Get the amount of data written to a socket after invoking the writeToSocket method.
             long getStreamOutSize();
+            //getter for socket
+            int getSocket( );
             ~TCPSocket ( ); // Destructor: shutdown the target socket and deallocate all its resources
 };
 

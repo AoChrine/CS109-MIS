@@ -9,8 +9,8 @@ int main (int argc,char ** argv){
 
 	TCPServerSocket testSocket((char*)"127.0.0.1",9999,1);
 	testSocket.initializeSocket();
-	TCPSocket* tcpsock = testSocket.getConnection();
-	
+	TCPSocket* tcpsock = testSocket.getConnection(0,0,-1,-1);
+	//cout << "does it get here" << endl;
 	
 	int maxBytes = 1024; // size of buffer
 	char buffer[maxBytes]; // alocat buffer of 1 K
