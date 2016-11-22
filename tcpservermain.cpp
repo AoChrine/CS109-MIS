@@ -1,9 +1,9 @@
 #include "TCPServerSocket.h"
-#include "common2.h"
+#include "common.h"
+
 
 using namespace std;
 
-void terminate_with_error (const char * error_msg,int sock);
 
 int main (int argc,char ** argv){
 

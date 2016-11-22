@@ -1,6 +1,7 @@
 //main.cpp
 #include "common.h"
-//#include "Instruction.h"
+#include "TCPSocket.h"
+#include "TCPServerSocket.h"
 #include "Var.h"
 #include "Add.h"
 #include "Mul.h"
@@ -20,17 +21,45 @@
 #include "Jmplt.h"
 #include "Jmplte.h"
 
-// #include "DataType.cpp"
-
 /////////////////////////////////////////////////////////////////////////////////////////PARAMETER CHECKING DOESNT WORK///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 using namespace std;
 
 
-void parse(const string& file, unordered_map<string, pair<string,string>>& varMap, unordered_map<string, Instruction*>& instMap, vector<Instruction*>& instVec);
+void parse(const vector<string>& stringVec, unordered_map<string, pair<string,string>>& varMap, unordered_map<string, Instruction*>& instMap, vector<Instruction*>& instVec);
 
 int main(int argc, const char* argv[] )
 {
+
+
+	TCPServerSocket testSocket((char*)"127.0.0.1",9999,1);
+	testSocket.initializeSocket();
+	while(1) {
+	TCPSocket* tcpsock = testSocket.getConnection(0,0,-1,-1);
+	//cout << "does it get here" << endl;
+	vector<string> stringVec;
+	int maxBytes = 1024; // size of buffer
+	char buffer[maxBytes]; // alocat buffer of 1 K
+	memset(buffer,0,maxBytes); // initialize it.
+	int bytes_read = tcpsock->readFromSocket(buffer, maxBytes); // read data from the socket
+	// if returned number of bytes is bigger that zero then print information about client and themessage
+	if ( bytes_read > 0 ){
+		//printf ("Received Message from %s:%d\n",(char*)inet_ntoa(clientAddr.sin_addr),clientAddr.sin_port);
+		char* temp;
+		temp = strtok(buffer,"~");
+		while(temp != NULL) {
+			string tempstr(temp);
+			stringVec.push_back(tempstr);
+			temp = strtok(NULL,"~");
+
+		}
+		for(auto&x: stringVec) {
+			cout << x << endl;
+		}
+	}else perror("Error Receiving Message:"); // else print error through perror.
+
+
+	
 	ofstream err;
 	err.open("MIS.err", std::ios_base::app);
 	//ofstream outputFile("errors.err");
@@ -38,25 +67,62 @@ int main(int argc, const char* argv[] )
 	//vector<class name w/template> resultVec;
 	unordered_map<string, Instruction*> instMap;
 	vector<Instruction*> instVec;
+
+	vector<string> outVec;
+	vector<string> errVec;
 	
-	//check there is file
-	if(argc > 1) {
-		parse(argv[1], varMap, instMap, instVec);
-	}else {
-		err << "no file" << endl;
+
+	parse(stringVec, varMap, instMap, instVec);
+
+
+	
+	string oline = "";
+	ifstream readFile("MIS.out");
+	while(getline(readFile,oline))
+	{
+		outVec.push_back(oline);
 	}
 
-	// for(auto it = varMap.cbegin(); it != varMap.cend(); it++){
-	// 	cout << it->first << ": " << it->second.first << endl;
-	// }
+	readFile.close();
 
+	string eline = "";
+	ifstream readFile2("MIS.err");
+	while(getline(readFile2, eline))
+	{
+		errVec.push_back(eline);
+	}
+
+	readFile2.close();
+
+	string passOutstr = outVec.at(0);
+	for(auto it = outVec.begin()+1; it != outVec.end(); it++){
+		passOutstr += '~'+(*it);
+	}
+
+	string passErrstr = errVec.at(0);
+	for(auto it = errVec.begin()+1; it != errVec.end(); it++){
+		passErrstr += '~'+(*it);
+	}
+
+	string overallStr = passOutstr + passErrstr;
+
+	cout << "overallstr is: " << overallStr << endl;
+	
+	const void* myOverallstr = overallStr.c_str();
+
+	printf("%s\n",myOverallstr);
+
+	send(tcpsock->getSocket(),myOverallstr,overallStr.size(),0);
+
+}
 	return 0;
+
 
 }
 
 /******** PARSE VAR, MAKE DATATYPE OBJECT, STORE IN VARMAP *****/
 
-void parse(const string& file, unordered_map<string, pair<string,string>>& varMap, unordered_map<string, Instruction*>& instMap,vector<Instruction*>& instVec)
+void parse(const vector<string>& stringVec, unordered_map<string, pair<string,string>>& varMap, unordered_map<string, Instruction*>& instMap,vector<Instruction*>& instVec)
 {
 	ofstream err;
 	err.open("MIS.err", std::ios_base::app);
@@ -82,12 +148,11 @@ void parse(const string& file, unordered_map<string, pair<string,string>>& varMa
 	instMap["JMPLTE"] = new Jmplte();
 
 
-	string line=""; //reading lines from text file
-	ifstream readFile(file);
+	string line= ""; //reading lines from text file
+	//ifstream readFile(file);
 	string name = ""; //string for instruction type
-	while(getline(readFile, line))
-	{
-		stringstream iss(line);
+	for(auto it = stringVec.begin(); it != stringVec.end(); it++) {
+		stringstream iss(*it);
 		getline(iss, name, ' '); 
 		Instruction * inst = instMap[name]; //Object intialization
 		if(inst !=NULL)
@@ -267,5 +332,5 @@ void parse(const string& file, unordered_map<string, pair<string,string>>& varMa
 		}
 		jumpCounter++;
 	}
-	readFile.close();
+	//readFile.close();
 }

@@ -4,19 +4,28 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <stdlib.h>
-#include <string.h>
 #include <inttypes.h>
 #include <iostream>
 #include <fstream>
-#include <string>
 #include <vector>
 #include <cmath>
 #include <algorithm>
 #include <typeinfo>
-#include <sstream>
 #include <unordered_map>
 #include <string>
-#include <map>
 #include <chrono>
 #include <thread>
 #include <cstring>
+#include <cstdint>
+#include <array>
+#include <iterator>
+#include <map>
+#include <cstdlib>
+#include <sstream>
+
+
+// struct ignorecase { 
+//     bool operator() (const std::string& lhs, const std::string& rhs) const {
+//         return strcasecmp(lhs.c_str(), rhs.c_str()) < 0;
+//     }
+// };

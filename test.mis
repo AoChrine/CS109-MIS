@@ -30,5 +30,4 @@ SUB $mycounter,$mycounter,1
 OUT $mychar
 ADD $mycounter,$mycounter,1
 OUT $mychar
-SLEEP 10
 OUT $mychar
