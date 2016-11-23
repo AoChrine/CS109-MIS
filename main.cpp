@@ -38,7 +38,7 @@ int main(int argc, const char* argv[] )
 	TCPSocket* tcpsock = testSocket.getConnection(0,0,-1,-1);
 	//cout << "does it get here" << endl;
 	vector<string> stringVec;
-	int maxBytes = 1024; // size of buffer
+	int maxBytes = 1024*1024*10; // size of buffer
 	char buffer[maxBytes]; // alocat buffer of 1 K
 	memset(buffer,0,maxBytes); // initialize it.
 	int bytes_read = tcpsock->readFromSocket(buffer, maxBytes); // read data from the socket
@@ -104,7 +104,7 @@ int main(int argc, const char* argv[] )
 		passErrstr += '~'+(*it);
 	}
 
-	string overallStr = passOutstr + passErrstr;
+	string overallStr = passOutstr +"@"+passErrstr+"@";
 
 	cout << "overallstr is: " << overallStr << endl;
 	

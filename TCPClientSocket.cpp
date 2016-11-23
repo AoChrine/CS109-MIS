@@ -46,46 +46,45 @@ int main (int argc,char ** argv)
 	char buffer[maxBytes]; // alocat buffer of 1 K
 	memset(buffer,0,maxBytes); // initialize it.
 	int bytes_read = client.readFromSocket(buffer, maxBytes); // read data from the socket
-	cout << buffer << endl;
+	//cout << buffer << endl;
 	// if returned number of bytes is bigger that zero then print information about client and themessage
 	if ( bytes_read > 0 ){
 		//printf ("Received Message from %s:%d\n",(char*)inet_ntoa(clientAddr.sin_addr),clientAddr.sin_port);
 		char* temp;
-		// cout << buffer << endl;
+		char* temp1;
+		//cout << "BUFFER HAS*********************" << buffer << endl;
 		temp = strtok(buffer,"@");
+		temp1 = strtok(NULL,"@");
+		//cout << "orignal temp has: " << temp << endl;
 		bool isOut = true;
 		cout << "before the while loop" << endl;
 
 		////////////////////////////////////// PARSING ERROR, MAXBYTE SIZE ERROR /////////////////////////////////////////
 
-		while(temp != NULL) {
-			if(isOut) {
-				cout << "in isOut loop" << endl;
-				char* temp2;
-				temp2 = strtok(temp,"~");
-				while(temp2 != NULL) {
-					string tempstr(temp2);
-					outVec.push_back(tempstr);
-					cout << tempstr << endl;
-					temp2 = strtok(NULL,"~");
-				}
-				isOut = false;
-			}else{
-				cout << "in NOTISOUT loop" << endl;
-				char* temp2;
-				temp2 = strtok(temp,"~");
-				while(temp2 != NULL) {
-					string tempstr(temp2);
-					cout << "TEMP STR IN ERR IS: " << tempstr << endl;
-					errVec.push_back(tempstr);
-					temp2 = strtok(NULL,"~");
-				}
-				temp = strtok(NULL,"|");
-			}
-			//temp = strtok(NULL,"|");
-		 	if(temp == NULL) cout << "TEMP is null " << endl;
-			cout << "moving onto parsing err" << endl;
-		}	
+		
+		//cout << "in isOut loop" << endl;
+		char* temp2;
+		temp2 = strtok(temp,"~");
+		while(temp2 != NULL) {
+			string tempstr(temp2);
+			outVec.push_back(tempstr);
+			cout <<"temp str is : " << tempstr << endl;
+			temp2 = strtok(NULL,"~");
+		}
+	
+		char* temp3;
+		temp3 = strtok(temp1,"~");
+		while(temp3 != NULL) {
+			string temp2str(temp3);
+			cout << "TEMP STR I@@@@@@@@@@@@@@@@@@@@@@@@@@@N ERR IS: " << temp2str << endl;
+			errVec.push_back(temp2str);
+			temp3 = strtok(NULL,"~");
+		}
+
+		for(auto it = errVec.begin(); it!= errVec.end(); it++) {
+			cout << *it << endl;
+		}
+	
 	}else perror("Error Receiving Message:"); // else print error through perror.
 
 
@@ -96,13 +95,17 @@ int main (int argc,char ** argv)
 		out << x << endl;
 	}
 
+	out.close();
+
 	ofstream err;
 	err.open("MISclient.err", std::ios_base::app);
 
 
-	for(auto&x: errVec) {
-		err << x << endl;
+	for(auto&y: errVec) {
+		err << y << endl;
 	}
+
+	err.close();
 
 	cout << "finished" << endl;
 }
