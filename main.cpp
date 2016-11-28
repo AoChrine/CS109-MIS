@@ -45,7 +45,7 @@ int main(int argc, const char* argv[] )
 	garbageCollector -> cleanup();
 	Connection * c = new Connection(tcpsock);
 	c->start();
-	c->run(c->getThreadHandler());
+	//c->run(c->getThreadHandler());
 	garbageCollector->addConnection(c);
 	cout<<"HERE"<<endl;
 	//c->run(c->getThreadHandler());
