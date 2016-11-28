@@ -16,7 +16,7 @@ Connection::~Connection(){if ( tcpSocket != NULL ) delete (tcpSocket);}
 
 void * Connection::threadMainBody(void *arg)
 {
-	cout<<"threading body"<<endl;
+	// cout<<"threading body"<<endl;
 	vector<string> stringVec;
 	int maxBytes = 1024*1024; // size of buffer. if we want to increase buffer size, use long
 	char buffer[maxBytes]; // alocat buffer of 1 K
@@ -43,7 +43,7 @@ void * Connection::threadMainBody(void *arg)
 
 	
 	ofstream err;
-	err.open("MIS.err", std::ios_base::app);
+	err.open("MIS.err", std::ios_base::app); // opens error file
 	//ofstream outputFile("errors.err");
 	unordered_map<string, pair<string, string>> varMap;
 	//vector<class name w/template> resultVec;
@@ -54,19 +54,19 @@ void * Connection::threadMainBody(void *arg)
 	vector<string> errVec;
 	
 	Parser* parser = new Parser();
-	parser->parse(stringVec, varMap, instMap, instVec);
+	parser->parse(stringVec, varMap, instMap, instVec); // calls parse function to separate instructions 
 
 
-	cout<<"still here"<<endl;
+	// cout<<"still here"<<endl;
 	string oline = "";
 	ifstream readFile("MIS.out");
 	while(getline(readFile,oline))
 	{
-		outVec.push_back(oline);
+		outVec.push_back(oline); // passes string back to outvec
 	}
 
 	readFile.close();
-	cout<<"how bout here"<<endl;
+	// cout<<"how bout here"<<endl;
 	string eline = "";
 	ifstream readFile2("MIS.err");
 	while(getline(readFile2, eline))
@@ -78,22 +78,24 @@ void * Connection::threadMainBody(void *arg)
 
 	string passOutstr = outVec.at(0);
 	for(auto it = outVec.begin()+1; it != outVec.end(); it++){
-		passOutstr += '~'+(*it);
+		passOutstr += '~'+(*it);  // combining out strings separated with a tilde into a cstring
 	}
 
 	string passErrstr = errVec.at(0);
 	for(auto it = errVec.begin()+1; it != errVec.end(); it++){
-		passErrstr += '~'+(*it);
+		passErrstr += '~'+(*it); // combining err strings separated with a tilde into a cstring
 	}
 
-	string overallStr = passOutstr +"@"+passErrstr+"@";
+	string overallStr = passOutstr +"@"+passErrstr+"@"; // separates outstring and errstring with an @ sign for future parsing
 
-	cout << "overallstr is: " << overallStr << endl;
+	// cout << "overallstr is: " << overallStr << endl;
 	
 	const void* myOverallstr = overallStr.c_str();
 
-	printf("%s\n",myOverallstr);
+	// printf("%s\n",myOverallstr);
 	
 	send(tcpSocket->getSocket(),myOverallstr,overallStr.size(),0);
+
+	err.close();
 
 }

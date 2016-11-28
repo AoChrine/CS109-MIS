@@ -24,8 +24,11 @@ void Sleep::process(unordered_map<string, pair<string, string>>& varMap,vector<I
     }else{
         varParam = param1;
     }
+    // cout << "going to sleep" << endl;
     chrono::seconds dura(atoi(varParam.c_str())); // creates duration to sleep for in seconds
     this_thread::sleep_for(dura);               // sleeps for specified duration
+    // cout << "done sleeping" << endl;
+
 }
 
 string Sleep::getName()

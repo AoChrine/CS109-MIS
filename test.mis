@@ -1,4 +1,4 @@
-SLEEP 10
+SLEEP 7
 VAR $myint,NUMERIC,100
 VAR $myfloat,REAL,12.5
 VAR $myresult,REAL,0

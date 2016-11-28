@@ -1,6 +1,6 @@
+SLEEP 3
 VAR $mystring,STRING,100,"Hello world"
 OUT $mystring
-THREAD_BEGIN
 OUT 5
-THREAD_END
+SLEEP 3
 OUT $mystring

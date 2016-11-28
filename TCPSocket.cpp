@@ -70,7 +70,7 @@ TCPSocket::TCPSocket (char * _address, int port ,int readBufferSize,int writeBuf
             cout<<readBufferSize<<setsockopt(sock, SOL_SOCKET, SO_RCVBUF,(void*) &readBufferSize,sizeof(int))<<endl;
         }
         if ( writeBufferSize != -1 &&  setsockopt(sock, SOL_SOCKET, SO_SNDBUF,(void*) &writeBufferSize,sizeof(int)) == -1)
-            printf ("Error setting send buffer\n");
+            //printf ("Error setting send buffer\n");
         // Connect to remote server
         if (connect(sock,(sockaddr *)&serv_addr,sizeof(serv_addr)) == -1 )  { // if cannot connect
             perror ("Connection error\n");  // Print error using perror

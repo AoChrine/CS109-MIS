@@ -2,10 +2,10 @@
 
 MKFILE      = Makefile
 GMAKE       = ${MAKE} --no-print-directory
-COMPILECPP  = g++ -std=c++14 -pthread -g -w -O0 -Wall -Wextra -Wold-style-cast
+COMPILECPP  = g++ -std=c++14 -pthread -g -w -O0 -ferror-limit=100 -Wall -Wextra -Wold-style-cast
 MAKEDEPCPP  = g++ -std=c++14 -MM
 
-MODULES     = Add Assign DataType Div Gsc Instruction Jmp Jmpgt Jmpgte Jmplt Jmplte Jmpnz Jmpz Label Mul Out Sleep Ssc Sub Var TCPServerSocket TCPSocket Thread Connection GarbageCollector Parser
+MODULES     = ThreadRunner ThreadBegin ThreadEnd Add Assign DataType Div Gsc Instruction Jmp Jmpgt Jmpgte Jmplt Jmplte Jmpnz Jmpz Label Mul Out Sleep Ssc Sub Var TCPServerSocket TCPSocket Thread Connection GarbageCollector Parser
 CPPHEADER   = ${MODULES:=.h} common.h
 CPPSOURCE   = ${MODULES:=.cpp} main.cpp
 EXECBIN     = main

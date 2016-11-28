@@ -9,7 +9,7 @@ int main (int argc,char ** argv)
 		printf ("Usage: ./client <server-address> <file> \n");
 	}	
 
-	TCPSocket client((char*)"127.0.0.1",9999,-1,-1);
+	TCPSocket client((char*)"127.0.0.1",9999,-1,-1); // creates new client under port 9999 and address 127.0.0.1
 
 	vector<string> stringVec;
 
@@ -56,9 +56,7 @@ int main (int argc,char ** argv)
 		temp1 = strtok(NULL,"@");
 		//cout << "orignal temp has: " << temp << endl;
 		bool isOut = true;
-		cout << "before the while loop" << endl;
-
-		////////////////////////////////////// PARSING ERROR, MAXBYTE SIZE ERROR /////////////////////////////////////////
+		// cout << "before the while loop" << endl;
 
 		
 		//cout << "in isOut loop" << endl;
@@ -67,22 +65,22 @@ int main (int argc,char ** argv)
 		while(temp2 != NULL) {
 			string tempstr(temp2);
 			outVec.push_back(tempstr);
-			cout <<"temp str is : " << tempstr << endl;
-			temp2 = strtok(NULL,"~");
+			// cout <<"temp str is : " << tempstr << endl;
+			temp2 = strtok(NULL,"~"); // parses by tildes in outvec
 		}
 	
 		char* temp3;
 		temp3 = strtok(temp1,"~");
 		while(temp3 != NULL) {
 			string temp2str(temp3);
-			cout << "TEMP STR I@@@@@@@@@@@@@@@@@@@@@@@@@@@N ERR IS: " << temp2str << endl;
+			// cout << "TEMP STR I@@@@@@@@@@@@@@@@@@@@@@@@@@@N ERR IS: " << temp2str << endl;
 			errVec.push_back(temp2str);
-			temp3 = strtok(NULL,"~");
+			temp3 = strtok(NULL,"~"); // parses by tildes in errvec
 		}
 
-		for(auto it = errVec.begin(); it!= errVec.end(); it++) {
-			cout << *it << endl;
-		}
+		// for(auto it = errVec.begin(); it!= errVec.end(); it++) {
+		// 	cout << *it << endl;
+		// }
 	
 	}else perror("Error Receiving Message:"); // else print error through perror.
 
@@ -90,19 +88,22 @@ int main (int argc,char ** argv)
 	ofstream out;
 	out.open("MISclient.out", std::ios_base::app);
 
-	for(auto&x: outVec) {
-		out << x << endl;
-	}
+	if(!outVec.empty()){
+		for(auto&x: outVec) {
+			out << x << endl; // pushes all output in outvec into output file
+		}
+	}	
 
 	out.close();
 
 	ofstream err;
 	err.open("MISclient.err", std::ios_base::app);
 
-
-	for(auto&y: errVec) {
-		err << y << endl;
-	}
+	if(!errVec.empty()){
+		for(auto&y: errVec) {
+			err << y << endl; // pushes all errors in errvec into error file
+		}
+	}	
 
 	err.close();
 
