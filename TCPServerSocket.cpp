@@ -94,7 +94,7 @@ TCPSocket * TCPServerSocket::getConnection (int timeoutSec, int timeoutMilli,int
 		{
                         // call accept on sock to get the pending connection
 			newsock = accept(sock, (struct sockaddr *)&clientAddr,&sin_size);
-			cout<<"HERE:"<<newsock<<endl;
+			// cout<<"HERE:"<<newsock<<endl;
 		}
 	}
         if ( newsock < 1 ) // if newsock is less than one then erroro

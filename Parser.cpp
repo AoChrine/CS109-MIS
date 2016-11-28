@@ -260,7 +260,7 @@ void Parser::parse(const vector<string>& stringVec, unordered_map<string, pair<s
 	}
 }
 	//readFile.close();
-	cout<<"YES"<<endl;
+	// cout<<"YES"<<endl;
 }
 
 

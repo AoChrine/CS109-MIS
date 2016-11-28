@@ -47,7 +47,7 @@ int main(int argc, const char* argv[] )
 	c->start();
 	//c->run(c->getThreadHandler());
 	garbageCollector->addConnection(c);
-	cout<<"HERE"<<endl;
+	// cout<<"HERE"<<endl;
 	//c->run(c->getThreadHandler());
 	// vector<string> stringVec;
 	// int maxBytes = 1024*1024; // size of buffer. if we want to increase buffer size, use long
