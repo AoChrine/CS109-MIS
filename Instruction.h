@@ -1,5 +1,7 @@
 //Instruction.h
 //#pragma once
+#ifndef INSTRUCTION_H
+#define INSTRUCTION_H
 
 #include "common.h"
 using namespace std;
@@ -18,3 +20,5 @@ public:
   virtual string getParam3(){"";}
   virtual ~Instruction(); // desctructor
 };
+
+#endif

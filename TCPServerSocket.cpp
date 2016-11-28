@@ -1,4 +1,5 @@
 #include "TCPServerSocket.h"
+using namespace std;
 // Constructor
 TCPServerSocket::TCPServerSocket (const char * _address, int _port, int _backlog )
 {
@@ -73,13 +74,12 @@ bool TCPServerSocket::initializeSocket ( ) // Initialize server socket
  // Wait for a client connection. if timeoutSec and timeoutMilli are zeros the method will behave in a blocking mode
 TCPSocket * TCPServerSocket::getConnection (int timeoutSec, int timeoutMilli,int readBufferSize,int writeBufferSize )
 {
-	socklen_t sin_size ;//= sizeof(struct sockaddr_in);
+	socklen_t sin_size =sizeof(struct sockaddr_in) ;//= sizeof(struct sockaddr_in);
         int newsock = 0;
 	if (timeoutSec==0 && timeoutMilli == 0 )// Blocking mode
 	{
                 // Wait for connection indefinitely
 		newsock = accept(sock, (struct sockaddr *)&clientAddr,&sin_size);
-
 	}
 	else { // Set up time out timeval and file descriptors set
                 fd_set fds; 
@@ -94,11 +94,12 @@ TCPSocket * TCPServerSocket::getConnection (int timeoutSec, int timeoutMilli,int
 		{
                         // call accept on sock to get the pending connection
 			newsock = accept(sock, (struct sockaddr *)&clientAddr,&sin_size);
+			cout<<"HERE:"<<newsock<<endl;
 		}
 	}
         if ( newsock < 1 ) // if newsock is less than one then erroro
         {   // Print the error and return NULL
-            perror("ERROR on accept");
+            perror("hereERROR on accept");
             return NULL;
         }
         else{ // Else instantiate a TCPSocket object and return a pointer to it 

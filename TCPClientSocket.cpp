@@ -34,7 +34,6 @@ int main (int argc,char ** argv)
 	}
 	
 	send(client.getSocket(),mystr,passstr.size(),0);
-	//client.writeToSocket((char *)"fuck karim", 100); // Send a message to the server.
 		//close(sock);// Close the socket.
 
 	vector<string> outVec;
