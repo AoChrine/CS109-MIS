@@ -76,14 +76,21 @@ void * Connection::threadMainBody(void *arg)
 
 	readFile2.close();
 
-	string passOutstr = outVec.at(0);
-	for(auto it = outVec.begin()+1; it != outVec.end(); it++){
-		passOutstr += '~'+(*it);  // combining out strings separated with a tilde into a cstring
+	string passOutstr = "";
+	string passErrstr = "";
+
+	if(!outVec.empty()) {
+		passOutstr = outVec.at(0);
+		for(auto it = outVec.begin()+1; it != outVec.end(); it++){
+			passOutstr += '~'+(*it);  // combining out strings separated with a tilde into a cstring
+		}
 	}
 
-	string passErrstr = errVec.at(0);
-	for(auto it = errVec.begin()+1; it != errVec.end(); it++){
-		passErrstr += '~'+(*it); // combining err strings separated with a tilde into a cstring
+	if(!errVec.empty()) {
+		passErrstr = errVec.at(0);
+		for(auto it = errVec.begin()+1; it != errVec.end(); it++){
+			passErrstr += '~'+(*it); // combining err strings separated with a tilde into a cstring
+		}
 	}
 
 	string overallStr = passOutstr +"@"+passErrstr+"@"; // separates outstring and errstring with an @ sign for future parsing

@@ -19,11 +19,12 @@ void Ssc::initialize(stringstream& ss)
     index = strtof(s.c_str(),NULL);
     //cout<<index<<endl;
     getline(ss,s, ',');
-    character.assign(s);
+    char c = s[1];
+    character.assign(&c);
     //cout<<character<<endl;
     getline(ss,s);
-    if(!s.empty()){
-        err << "Invalid number of parameters for Ssc/Gsc" << endl;
+    if(!s.compare(character)==0){
+        err << "Invalid number of parameters for Gsc/Ssc" << endl;
     }
 }
 

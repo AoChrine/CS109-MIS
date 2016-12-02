@@ -35,6 +35,10 @@ void Out::initialize (stringstream& ss){
 
 void Out::process(unordered_map<string, pair<string, string>>& varMap,vector<Instruction*>& instVec){
     ofstream out;
+    
+    if(remove("MIS.out")!=0) perror("failed to delete MIS.out");
+    else puts("file deleted");
+
     out.open("MIS.out",fstream::app);
     
     for(auto it = paramVec.begin(); it!= paramVec.end(); it++){

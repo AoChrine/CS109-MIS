@@ -21,7 +21,8 @@ void Assign::initialize (stringstream& ss){
     getline(ss, str, ',');
     param2.assign(str);             // sets what to change parameter to
     getline(ss,str,',');
-    if(str.compare(param2)==0 || !str.empty()){
+    cout << "PARAM2 IS: " << param2 << endl;
+    if(!str.compare(param2)==0){
         err << "Invalid number of parameters for Assign" << endl;
     }
 }

@@ -1,4 +1,3 @@
-SLEEP 7
 VAR $myint,NUMERIC,100
 VAR $myfloat,REAL,12.5
 VAR $myresult,REAL,0
@@ -18,11 +17,11 @@ DIV $myresult,$myint,$myfloat
 OUT $myresult
 DIV $myresult,$myint,5
 OUT $myresult
-SET_STR_CHAR $mystring,3,\n
+SET_STR_CHAR $mystring,3,'q'
 OUT $mystring
 GET_STR_CHAR $mystring,2,$mychar
 OUT $mychar
-ASSIGN $mystring,"Hadsofiashdfoiashdf",120312301,12,312,31,23,123,12
+ASSIGN $mystring,"Hadsofiashdfoiashdf"
 OUT $mystring
 OUT $mystring
 LABEL HELLOZZ

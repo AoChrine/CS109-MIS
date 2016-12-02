@@ -6,6 +6,9 @@ void Parser::parse(const vector<string>& stringVec, unordered_map<string, pair<s
 {
 	unordered_map<string, pair<string,string>>* tempMap = &varMap;
 	
+	if(remove("MIS.err")!=0) perror("error deleting mis.err");
+	else puts("file deleted");
+	
 	ofstream err;
 	err.open("MIS.err", ios::out | ios::app | ios::binary);
 	int instCount=0;

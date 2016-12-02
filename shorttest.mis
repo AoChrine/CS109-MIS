@@ -1,6 +1,0 @@
-SLEEP 3
-VAR $mystring,STRING,100,"Hello world"
-OUT $mystring
-OUT 5
-SLEEP 3
-OUT $mystring

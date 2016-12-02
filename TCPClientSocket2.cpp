@@ -86,6 +86,8 @@ int main (int argc,char ** argv)
 	
 	}else perror("Error Receiving Message:"); // else print error through perror.
 
+	if(remove("MISclient2.out")!=0) perror("failed to delete MISclient2.out");
+    else puts("file deleted");
 
 	ofstream out;
 	out.open("MISclient2.out", std::ios_base::app);
@@ -95,6 +97,10 @@ int main (int argc,char ** argv)
 	}
 
 	out.close();
+
+
+	if(remove("MISclient2.err")!=0) perror("failed to delete MISclient2.err");
+    else puts("file deleted");
 
 	ofstream err;
 	err.open("MISclient2.err", std::ios_base::app);
